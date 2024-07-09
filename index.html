@@ -13,21 +13,31 @@
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        .button {
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
+        .flags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
         }
         .flag {
             cursor: pointer;
-            width: 30px;
+            width: 40px;
             height: auto;
-            margin: 0 10px;
+            margin: 5px;
+        }
+        @media (max-width: 768px) {
+            .flag {
+                width: 9%;
+                height: fit-content;
+                margin: 5px;
+            }
+        }
+        @media (max-width: 576px) {
+            .flag {
+                width: 9%;
+                height: fit-content;
+                margin: 5px;
+            }
         }
     </style>
 </head>
@@ -37,14 +47,15 @@
         <div class="header header-06">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
-                    <div class="col-md-12 text-center">
-                        <div class="header-right">
-                            <!-- Bandiera di lingua -->
-                            <img src="path/to/italy-flag.png" class="flag" alt="Italian" id="italian">
-                            <img src="path/to/usa-flag.png" class="flag" alt="English" id="english">
-                            <img src="path/to/germany-flag.png" class="flag" alt="German" id="german">
-                            <img src="path/to/france-flag.png" class="flag" alt="French" id="french">
-                            <!-- Altre bandiere se necessario -->
+                    <div class="col-12 text-center">
+                        <div class="">
+                            <div class="flags">
+                                <img src="assets/img/italy.png" class="flag" alt="Italian" id="italian">
+                                <img src="assets/img/uk.png" class="flag" alt="English" id="english">
+                                <img src="assets/img/germany.png" class="flag" alt="German" id="german">
+                                <img src="assets/img/franch.png" class="flag" alt="French" id="french">
+                                <!-- Altre bandiere se necessario -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,7 +71,7 @@
                         <div class="col-xl-12 text-center">
                             <!-- heading start -->
                             <div class="heading">
-                                <h1 class="text-white wow fadeInUp " data-wow-delay=".2s" id="main-heading">Do You <br> Feel Safe at Home?</h1>
+                                <h1 class="text-white wow fadeInUp" data-wow-delay=".2s" id="main-heading">Do You <br> Feel Safe at Home?</h1>
                             </div>
                             <!-- heading end -->
                         </div>
@@ -74,9 +85,9 @@
                             <p class="wow fadeInLeft" data-wow-delay=".4s" id="main-desc">We believe that innovation and security should be accessible to everyone.</p>
                             <!-- desc end -->
                         </div>
-                        <div class="col-xl-12 text-center">
+                        <div class="col-xl-12 text-center" style="padding-top: 10%;">
                             <!-- voting buttons start -->
-                            <iframe frameborder="" width="100%" height="350" src="https://s.surveyplanet.com/668d02cf96f28a545cae05a9" frameborder="0"></iframe>
+                            <iframe frameborder="" width="100%" height="480" src="https://s.surveyplanet.com/668d02cf96f28a545cae05a9" frameborder="0"></iframe>
                         </div>
                     </div>
                 </div>
