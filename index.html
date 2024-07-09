@@ -1,139 +1,98 @@
-<!doctype html>
-<html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>CyberPlug</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberPlug Survey</title>
+    <link rel="stylesheet" href="assets/css/bootstrap-4.5.0.min.css">
+    <script type="module">
+        // Importa le funzioni necessarie dagli SDK di Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
-        <meta name="author" content="SoonLaunch">
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+        // Configurazione di Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCSFWaeBg7GUg4vPYe_niuy8HAIh_gxT9k",
+            authDomain: "cyberpsurvey.firebaseapp.com",
+            projectId: "cyberpsurvey",
+            storageBucket: "cyberpsurvey.appspot.com",
+            messagingSenderId: "944614697169",
+            appId: "1:944614697169:web:7a77c814728450928ebdf0",
+            measurementId: "G-QXX1HY57FS"
+        };
 
-        <link rel="stylesheet" href="assets/css/bootstrap-4.5.0.min.css">
-        <link rel="stylesheet" href="assets/css/lineicons.css">
-        <link rel="stylesheet" href="assets/css/animate.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <style>
-            .button {
-                padding: 10px 20px;
-                margin: 10px;
-                font-size: 16px;
-                cursor: pointer;
+        // Inizializza Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('survey-form');
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const option = document.getElementById('q1').value;
+                const ip = await getIp();
+
+                // Controlla se l'utente ha già votato (usando l'IP)
+                const q = query(collection(db, 'votes'), where('ip', '==', ip));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    // Aggiungi il voto al database
+                    await addDoc(collection(db, 'votes'), { option, ip });
+                    alert('Grazie per aver completato il sondaggio!');
+                    loadResults();
+                } else {
+                    alert('Hai già votato.');
+                }
+            });
+
+            async function loadResults() {
+                const votesCollection = collection(db, 'votes');
+                const querySnapshot = await getDocs(votesCollection);
+                let results = {};
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    results[data.option] = (results[data.option] || 0) + 1;
+                });
+
+                let resultsHtml = '<h3>Risultati del Sondaggio:</h3><ul>';
+                for (let [option, count] of Object.entries(results)) {
+                    resultsHtml += `<li>${option}: ${count} voti</li>`;
+                }
+                resultsHtml += '</ul>';
+                document.getElementById('results').innerHTML = resultsHtml;
             }
-            .result {
-                margin-top: 20px;
-                font-size: 18px;
-            }
-        </style>
-    </head>
-    <body>
-        <main class="main-06">
-            <!-- header start  -->
-            <div class="header header-06">
-                <div class="container">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-md-12 text-center">
-                            <div class="header-right">
-                                <!-- Header content here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- header end  -->
-            <!-- ========================= main-wrapper start ========================= -->
-            <div class="main-wrapper demo-06">
-                <!-- hero-area start  -->
-                <div class="hero-area">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-xl-12 text-center">
-                                <!-- heading start  -->
-                                <div class="heading">
-                                    <h1 class="text-white wow fadeInUp " data-wow-delay=".2s">Do You <br> Feel Safe at Home?</h1>
-                                </div>
-                                <!-- heading end  -->
-                            </div>
-                            <div class="col-xl-12 text-center">
-                                <!-- countdown start  -->
-                                <div class="wow fadeInRight" data-wow-delay=".4s" data-countdown="2025/08/01"></div>
-                                <!-- countdown end  -->
-                            </div>
-                            <div class="col-xl-12 text-center">
-                                <!-- desc start  -->
-                                <p class="wow fadeInLeft" data-wow-delay=".4s">We believe that innovation and security should be accessible to everyone.</p>
-                                <!-- desc end  -->
-                            </div>
-                            <div class="col-xl-12 text-center">
-                                <!-- voting buttons start -->
-                                <iframe frameborder="" width="100%" height="350" src="https://s.surveyplanet.com/668d02cf96f28a545cae05a9" frameborder="0"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- hero-area end  -->
-                <!-- team-area start  -->
-                <div class="team-area">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-xl-9 text-center">
-                                <!-- section-title start  -->
-                                <div class="section-title">
-                                    <!-- Section title content here -->
-                                </div>
-                                <!-- section-title end  -->
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- end container  -->
-                <!-- team-area end  -->
-            </div>
-            <!-- ========================= main-wrapper end ========================= -->
-            <!-- footer start  -->
-            <div class="footer">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 text-center">
-                            <div class="credit wow fadeInRight" data-wow-delay=".4s">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 text-center">
-                            <div class="credit wow fadeInRight" data-wow-delay=".4s">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 text-center">
-                            <div class="credit wow fadeInRight" data-wow-delay=".4s">
-                                <p>Designed by <a rel="nofollow" href="https://cyberplug.it">CyberPlug</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- footer end  -->
-        </main>
-        <!-- ========================= main end ========================= -->
 
-        <!-- ========================= JS here ========================= -->
-        <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
-        <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap-4.5.0.min.js"></script>
-        <script src="assets/js/countdown.js"></script>
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/main.js"></script>
-    </body>
+            async function getIp() {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            }
+
+            loadResults();
+        });
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>CyberPlug Survey</h2>
+        <form id="survey-form">
+            <div class="form-group">
+                <label for="q1">Ti senti al sicuro dal punto di vista informatico nella tua casa?</label>
+                <select class="form-control" id="q1" name="q1" required>
+                    <option value="">Seleziona un'opzione</option>
+                    <option value="molto-sicuro">Molto sicuro</option>
+                    <option value="abbastanza-sicuro">Abbastanza sicuro</option>
+                    <option value="neutrale">Né sicuro né insicuro</option>
+                    <option value="abbastanza-insicuro">Abbastanza insicuro</option>
+                    <option value="molto-insicuro">Molto insicuro</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Invia</button>
+        </form>
+        <div id="results" class="mt-4"></div>
+    </div>
+</body>
 </html>
