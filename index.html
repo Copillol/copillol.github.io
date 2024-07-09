@@ -87,7 +87,7 @@
                         </div>
                         <div class="col-xl-12 text-center" style="padding-top: 10%;">
                             <!-- voting buttons start -->
-                            <iframe frameborder="" width="100%" height="480" src="https://s.surveyplanet.com/668d02cf96f28a545cae05a9" frameborder="0"></iframe>
+                            <iframe id="survey-frame" frameborder="" width="100%" height="480" src="https://s.surveyplanet.com/668d02cf96f28a545cae05a9" frameborder="0"></iframe>
                         </div>
                     </div>
                 </div>
@@ -123,19 +123,23 @@
         const translations = {
             english: {
                 mainHeading: "Do You <br> Feel Safe at Home?",
-                mainDesc: "We believe that innovation and security should be accessible to everyone."
+                mainDesc: "We believe that innovation and security should be accessible to everyone.",
+                surveyLink: "https://s.surveyplanet.com/668d331c96f28a545cb35bac"
             },
             italian: {
-                mainHeading: "Ti senti al sicuro a casa?",
-                mainDesc: "Crediamo che l'innovazione e la sicurezza debbano essere accessibili a tutti."
+                mainHeading: "Ti senti <br> al sicuro a casa?",
+                mainDesc: "Crediamo che l'innovazione e la sicurezza debbano essere accessibili a tutti.",
+                surveyLink: "https://s.surveyplanet.com/668d02cf96f28a545cae05a9"
             },
             german: {
-                mainHeading: "Fühlst du dich zuhause sicher?",
-                mainDesc: "Wir glauben, dass Innovation und Sicherheit für jeden zugänglich sein sollten."
+                mainHeading: "Fühlst du <br> dich zuhause sicher?",
+                mainDesc: "Wir glauben, dass Innovation und Sicherheit für jeden zugänglich sein sollten.",
+                surveyLink: "https://s.surveyplanet.com/668d373096f28a545cb3e30e"
             },
             french: {
-                mainHeading: "Vous sentez-vous en sécurité chez vous?",
-                mainDesc: "Nous croyons que l'innovation et la sécurité devraient être accessibles à tous."
+                mainHeading: "Vous sentez-vous <br> en sécurité chez vous?",
+                mainDesc: "Nous croyons que l'innovation et la sécurité devraient être accessibles à tous.",
+                surveyLink: "https://s.surveyplanet.com/668d351d96f28a545cb39d6b"
             }
             // Aggiungi altre lingue se necessario
         };
@@ -148,6 +152,7 @@
         function setLanguage(language) {
             document.getElementById('main-heading').innerHTML = translations[language].mainHeading;
             document.getElementById('main-desc').textContent = translations[language].mainDesc;
+            document.getElementById('survey-frame').src = translations[language].surveyLink;
         }
     </script>
 </body>
