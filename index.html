@@ -1,15 +1,13 @@
 <!doctype html>
-<html class="no-js" lang="it">
+<html class="no-js" lang="">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>CyberPlug</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta name="author" content="SoonLaunch">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-
     <link rel="stylesheet" href="assets/css/bootstrap-4.5.0.min.css">
     <link rel="stylesheet" href="assets/css/lineicons.css">
     <link rel="stylesheet" href="assets/css/animate.css">
@@ -25,94 +23,83 @@
             margin-top: 20px;
             font-size: 18px;
         }
+        .flag {
+            cursor: pointer;
+            width: 30px;
+            height: auto;
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
     <main class="main-06">
-        <!-- header start  -->
+        <!-- header start -->
         <div class="header header-06">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-12 text-center">
                         <div class="header-right">
-                            <!-- Header content here -->
+                            <!-- Bandiera di lingua -->
+                            <img src="path/to/italy-flag.png" class="flag" alt="Italian" id="italian">
+                            <img src="path/to/usa-flag.png" class="flag" alt="English" id="english">
+                            <img src="path/to/germany-flag.png" class="flag" alt="German" id="german">
+                            <img src="path/to/france-flag.png" class="flag" alt="French" id="french">
+                            <!-- Altre bandiere se necessario -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- header end  -->
+        <!-- header end -->
         <!-- ========================= main-wrapper start ========================= -->
         <div class="main-wrapper demo-06">
-            <!-- hero-area start  -->
+            <!-- hero-area start -->
             <div class="hero-area">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-xl-12 text-center">
-                            <!-- heading start  -->
+                            <!-- heading start -->
                             <div class="heading">
-                                <h1 class="text-white wow fadeInUp " data-wow-delay=".2s">Do You <br> Feel Safe at Home?</h1>
+                                <h1 class="text-white wow fadeInUp " data-wow-delay=".2s" id="main-heading">Do You <br> Feel Safe at Home?</h1>
                             </div>
-                            <!-- heading end  -->
+                            <!-- heading end -->
                         </div>
                         <div class="col-xl-12 text-center">
-                            <!-- countdown start  -->
+                            <!-- countdown start -->
                             <div class="wow fadeInRight" data-wow-delay=".4s" data-countdown="2025/08/01"></div>
-                            <!-- countdown end  -->
+                            <!-- countdown end -->
                         </div>
                         <div class="col-xl-12 text-center">
-                            <!-- desc start  -->
-                            <p class="wow fadeInLeft" data-wow-delay=".4s">We believe that innovation and security should be accessible to everyone.</p>
-                            <!-- desc end  -->
+                            <!-- desc start -->
+                            <p class="wow fadeInLeft" data-wow-delay=".4s" id="main-desc">We believe that innovation and security should be accessible to everyone.</p>
+                            <!-- desc end -->
                         </div>
                         <div class="col-xl-12 text-center">
                             <!-- voting buttons start -->
                             <iframe frameborder="" width="100%" height="350" src="https://s.surveyplanet.com/668d02cf96f28a545cae05a9" frameborder="0"></iframe>
-                            <div id="location-message" class="text-white mt-4"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- hero-area end  -->
-            <!-- team-area start  -->
+            <!-- hero-area end -->
+            <!-- team-area start -->
             <div class="team-area">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-xl-9 text-center">
-                            <!-- section-title start  -->
+                            <!-- section-title start -->
                             <div class="section-title">
                                 <!-- Section title content here -->
                             </div>
-                            <!-- section-title end  -->
+                            <!-- section-title end -->
                         </div>
                     </div>
                 </div>
-            </div> <!-- end container  -->
-            <!-- team-area end  -->
+            </div> <!-- end container -->
+            <!-- team-area end -->
         </div>
         <!-- ========================= main-wrapper end ========================= -->
-        <!-- footer start  -->
-        <div class="footer">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-12 text-center">
-                        <div class="credit wow fadeInRight" data-wow-delay=".4s">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-12 text-center">
-                        <div class="credit wow fadeInRight" data-wow-delay=".4s">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- footer start -->
         <div class="footer">
             <div class="container">
                 <div class="row justify-content-center">
@@ -124,7 +111,7 @@
                 </div>
             </div>
         </div>
-        <!-- footer end  -->
+        <!-- footer end -->
     </main>
     <!-- ========================= main end ========================= -->
 
@@ -137,22 +124,35 @@
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', async function () {
-            try {
-                const response = await fetch('https://ipinfo.io/json?token=YOUR_IPINFO_TOKEN');
-                const data = await response.json();
-                const country = data.country;
-                const locationMessage = document.getElementById('location-message');
-
-                if (country === 'IT') {
-                    locationMessage.textContent = 'Grazie per partecipare al nostro sondaggio dall\'Italia!';
-                } else {
-                    locationMessage.textContent = 'Grazie per partecipare al nostro sondaggio! Sembra che tu non sia in Italia.';
-                }
-            } catch (error) {
-                console.error('Errore nel recuperare le informazioni sulla posizione:', error);
+        const translations = {
+            english: {
+                mainHeading: "Do You <br> Feel Safe at Home?",
+                mainDesc: "We believe that innovation and security should be accessible to everyone."
+            },
+            italian: {
+                mainHeading: "Ti senti al sicuro a casa?",
+                mainDesc: "Crediamo che l'innovazione e la sicurezza debbano essere accessibili a tutti."
+            },
+            german: {
+                mainHeading: "Fühlst du dich zuhause sicher?",
+                mainDesc: "Wir glauben, dass Innovation und Sicherheit für jeden zugänglich sein sollten."
+            },
+            french: {
+                mainHeading: "Vous sentez-vous en sécurité chez vous?",
+                mainDesc: "Nous croyons que l'innovation et la sécurité devraient être accessibles à tous."
             }
-        });
+            // Aggiungi altre lingue se necessario
+        };
+
+        document.getElementById('english').addEventListener('click', () => setLanguage('english'));
+        document.getElementById('italian').addEventListener('click', () => setLanguage('italian'));
+        document.getElementById('german').addEventListener('click', () => setLanguage('german'));
+        document.getElementById('french').addEventListener('click', () => setLanguage('french'));
+
+        function setLanguage(language) {
+            document.getElementById('main-heading').innerHTML = translations[language].mainHeading;
+            document.getElementById('main-desc').textContent = translations[language].mainDesc;
+        }
     </script>
 </body>
 </html>
